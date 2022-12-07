@@ -1,0 +1,15 @@
+<h3>Post a Comment</h3>
+
+<%= form_with model: [@article, @comment], local: true do |f| %>
+    <p>
+        <%= f.label :author_name, 'Your Name' %><br/>
+        <%= f.text_field :author_name %>
+    </p>
+    <p>
+        <%= f.label :description, 'Your Comment' %><br/>
+        <%= f.text_area :description %>
+    </p>
+    <p>
+        <%= f.submit 'Post' %>
+    </p>
+<% end %>    
