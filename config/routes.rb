@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :articles do                 #, except: [:show]
     resources :comments
   end  
+  resources :tags
   root 'articles#index'
   # get 'articles/:id' => 'articles#show', as: 'articles_show'
   # Defines the root path route ("/")
