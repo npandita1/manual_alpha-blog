@@ -10,7 +10,11 @@ class ArticlesController < ApplicationController
     end  
     
     def index
-        @articles = Article.all
+        @articles = Article.search(params[:id])
+        @tags = Tag.all
+        # @tags = Tag.all
+        # @all_tags = @articles.collect {|article| article.tags}.flatten(1).uniq.compact_blank
+
     end
     
     def new
@@ -27,8 +31,7 @@ class ArticlesController < ApplicationController
         # else
         #     render 'new', status: :unprocessable_entity #422
         # end   
-        @article = Article.new(params.require(:article).permit(:title, :description, :tag_list))
-        debugger
+        @article = Article.new(article_params)
         if @article.save
             flash[:notice] = "Article was successfully saved."
             redirect_to article_path(@article)
@@ -61,8 +64,8 @@ class ArticlesController < ApplicationController
         @article = Article.find(params[:id])
     end
 
-    def article_params
-        params.require(:article).permit(:title, :description)
-    end    
+    # def article_params
+    #     params.require(:article).permit(:title, :description)
+    # end    
 
 end    

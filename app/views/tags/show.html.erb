@@ -1,7 +1,35 @@
 <h1>Articles Tagged with <%= @tag.name %></h1>
 
 <ul>
-  <% @tag.articles.each do |article| %>
-    <li><%= link_to article.title, article_path(article) %></li>
-  <% end %>
+    <% @required_hash.each do |article, comments| %>
+        <li><strong><%= link_to article.title, article_path(article) %></strong><br/>
+            <%= article.description %><br/>
+            <strong>Comments related to the article:</strong><br/>
+            <ul>
+                <% if comments.is_a?(String) %>
+                    <li><%= comments %></li><br/>
+                <% else %>
+                    <% comments.each do |comment| %>
+                        <li><%= comment.author_name %><br/>
+                        <%= comment.description %></li><br/>
+                    <% end %>
+                <% end %>
+            </ul>                         
+        </li>
+    <% end %>
+    <!--<% @tag.articles.each do |article| %>
+        <li><%= link_to article.title, article_path(article) %></li>
+        <h4>The comments associated with the article-</h4>
+        <ul>
+            <% if article.comments.empty? %>
+                <li>No Comments to display</li>
+            <% else %>    
+                <% article.comments.each do |comment| %>
+                    <li><strong>Comment by:</strong><%= comment.author_name %><br/>
+                    <strong>Description:</strong><%= comment.description %>
+                    </li>
+                <% end %>    
+            <% end %>
+        </ul>
+    <% end %>-->        
 </ul>
