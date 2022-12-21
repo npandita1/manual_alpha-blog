@@ -3,6 +3,15 @@
 <% @article.comments.each do |comment| %>
     <p><strong>Comment By:</strong><%= comment.author_name %><br/>
     <%= comment.description %><br/>
-    Posted <%= distance_of_time_in_words(comment.article.created_at, comment.created_at) %> later
+    Posted <%= distance_of_time_in_words(comment.article.created_at, comment.created_at) %> later<br/>
+    <%= link_to 'Reply', article_path(@article, :initial_comment_id => comment) %><br/>
+    <% if @comment.initial_comment_id == comment.id %>
+        <%= render'comments/comment_form' %>
+    <% end %>
+    <% if comment.replies.any? %>
+        <% comment.replies.each do |reply1| %>
+            Reply by: <%= reply1.author_name %>, Description: <%= reply1.description %><br/> 
+        <% end %> 
+    <% end %>          
     </p>
 <% end %>    

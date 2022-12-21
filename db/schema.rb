@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_233654) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_132243) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -24,7 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_233654) do
     t.integer "article_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "initial_comment_id"
     t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["initial_comment_id"], name: "index_comments_on_initial_comment_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -43,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_233654) do
   end
 
   add_foreign_key "comments", "articles"
+  add_foreign_key "comments", "comments", column: "initial_comment_id"
   add_foreign_key "taggings", "articles"
   add_foreign_key "taggings", "tags"
 end

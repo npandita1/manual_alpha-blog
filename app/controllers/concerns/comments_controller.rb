@@ -1,9 +1,9 @@
-class CommentsController < ApplicationController
+cclass CommentsController < ApplicationController
 
     def create
         @comment = Comment.new(comment_params)
         @comment.article_id = params[:article_id]
-        
+
         @comment.save
 
         redirect_to article_path(@comment.article)
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit(:author_name, :description)
+        params.require(:comment).permit(:author_name, :description, :initial_comment_id)
     end    
 
 end    

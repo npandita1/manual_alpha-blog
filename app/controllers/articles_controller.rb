@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
     def show
         @comment = Comment.new
         @comment.article_id = @article.id
+        @comment.initial_comment_id = params[:initial_comment_id]
         # @comment = @article.comments.new ?????
     end  
     

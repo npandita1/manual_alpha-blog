@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end  
   resources :tags
   root 'articles#index'
+  
   # get 'articles/:id' => 'articles#show', as: 'articles_show'
   # Defines the root path route ("/")
   # root "articles#index"
